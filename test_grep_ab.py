@@ -33,7 +33,29 @@ class TestsGrepAB(unittest.TestCase):
     def test_ok(self):
         A = 3
         B = 3
-        pattern = r'of'
+        pattern = r'ere'
+        file = 'test_data/test_ok_file_1.txt'
+        out = os.popen(self.command.format(A=A, B=B,
+                                           pattern=pattern, file=file))
+        string_cli_out = out.read()
+        string_my_out = my_function(file, pattern, A, B)
+        self.assertEquals(string_cli_out, string_my_out)
+
+    def test_ok_only_after(self):
+        A = 5
+        B = 0
+        pattern = r'ere'
+        file = 'test_data/test_ok_file_1.txt'
+        out = os.popen(self.command.format(A=A, B=B,
+                                           pattern=pattern, file=file))
+        string_cli_out = out.read()
+        string_my_out = my_function(file, pattern, A, B)
+        self.assertEquals(string_cli_out, string_my_out)
+
+    def test_ok_only_before(self):
+        A = 0
+        B = 5
+        pattern = r'ere'
         file = 'test_data/test_ok_file_1.txt'
         out = os.popen(self.command.format(A=A, B=B,
                                            pattern=pattern, file=file))
@@ -52,6 +74,7 @@ class TestsGrepAB(unittest.TestCase):
         string_my_out = my_function(file, pattern, A, B)
         self.assertEquals(string_cli_out, string_my_out)
 
+    @unittest.SkipTest
     def test_match_separator(self):
         A = 3
         B = 3
