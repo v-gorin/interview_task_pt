@@ -8,6 +8,11 @@ def list_checker(values, value_type=int):
     :param value_type: typo of value
     :return:
     """
+    if not isinstance(values, list):
+        raise TypeError('{current} is not a list'.format(current=values))
+    if len(values) == 0:
+        raise ValueError('List is empty')
+
     for v in values:
         if not isinstance(v, value_type):
             msg = 'Value "{0}" in list has {1}. '\
@@ -28,8 +33,6 @@ def shell_sort(num_list):
 
     if list_len == 1:
         return num_list
-    elif list_len == 0:
-        raise TypeError('List is empty')
 
     while step > 0:
         for start in range(step):
